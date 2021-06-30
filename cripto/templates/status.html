@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+    {% block titulo %}Status{% endblock %}
+
+        {% block contenido %}
+            <a href="/">Inicio /</a>
+            <a href="/compra">Compra /</a>
+            Status
+            
+    <h1>ESTADO DE LA INVERSIÓN</h1>
+    <table>
+                
+        <tr>
+            <th>Total de Euros Invertidos:</th>
+            <td>{{ formulario.InvEUR }}</td>
+        </tr>
+        <tr>
+            <th>Saldo de Euros Invertidos:</th>
+            <td>{{ formulario.SalEUR }}</td>
+        </tr>
+        <tr>
+            <th>Valor Actual de las Criptos (EUR):</th>
+            <td>{{ formulario.ValAct }} </td>
+        </tr>    
+        <tr>
+            <th>Valor Actual Total (EUR):</th>
+            <td>{{ formulario.ValActTot }} </td>
+        </tr>    
+             
+    </table>
+    
+            <a href="/">Volver</a> 
+        {% endblock %}

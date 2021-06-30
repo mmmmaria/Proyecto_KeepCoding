@@ -1,0 +1,1 @@
+from cripto import app

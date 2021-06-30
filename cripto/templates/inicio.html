@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+    {% block titulo %}Inicio{% endblock %}
+
+        {% block contenido %}
+            Inicio /
+                <a href="/compra">Compra /</a>
+                <a href="/status">Status</a>
+                
+        <h1>MOVIMIENTOS</h1>
+        <table>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>From</th>
+                <th>Q</th>
+                <th>To</th>
+                <th>Q</th>
+                <th>P.U</th>
+                <!--<th>P.Actual (EUR)</th>--> <!--Utilidad para comprobación del Status-->
+            </tr>
+            
+            {% for movimiento in datos %} 
+            <tr>
+                <td>{{ movimiento.fecha }}</td>
+                <td>{{ movimiento.hora }}</td>
+                <td>{{ movimiento.fromQ }}</td>
+                <td>{{ movimiento.cantidadFromQ }} </td>
+                <td>{{ movimiento.toQ }} </td>
+                <td>{{ movimiento.cantidadToQ }} </td>
+                <td>{{ movimiento.pu}} {{ movimiento.fromQ }}</td>
+                <!--<td>{{ movimiento.pa}} EUR </td>--> <!--Para comprobación del Status-->            
+             </tr>
+            {% endfor %}
+        </table>
+         
+        <a href="status">Status</a> 
+        <a href="compra">Compra</a> 
+                       
+{% endblock %}
+        
+   

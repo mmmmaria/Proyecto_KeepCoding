@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+    {% block titulo %}Compra{% endblock %}
+
+        {% block contenido %}
+            <a href="/">Inicio /</a>
+            Compra /
+            <a href="/status">Status</a> 
+            <h1>COMPRA DE CRYPTOS</h1>
+            
+        <form action="/compra" autocomplete="off" method="POST">
+            <fieldset class="container">
+                {{ form.hidden_tag() }}
+            
+                <div class="row">
+                    <div class ="column">
+                        {{ form.fecha.label(class="mylabel") }}
+                        {{ form.fecha(readonly=True) }}
+                        
+                    </div>
+                    <div class ="column">
+                        {{ form.hora.label(class="mylabel") }}
+                        {{ form.hora(readonly=True) }}
+                    </div>
+                </div> 
+                      
+                <div class="row">
+                    <div class ="column">
+                    {{ form.fromQ.label(class="mylabel") }}
+                    {{ form.fromQ()}} 
+                    {% for error in form.fromQ.errors %}
+                        <p class="msg-err">
+                            {{ error }}
+                        </p>    
+                    {% endfor %}
+                    </div>
+
+                    {{ form.hidden_tag() }}
+
+                    <div class ="column">
+                    {{ form.cantidadFromQ.label(class="mylabel") }}
+                    {{ form.cantidadFromQ() }}
+                    {% for error in form.cantidadFromQ.errors %}
+                        <p class="msg-err">
+                            {{ error }}
+                        </p>    
+                    {% endfor %}
+                    </div>
+                </div>
+                      
+                {{ form.hidden_tag() }}
+
+                <div class="row">
+                    <div class ="column">
+                    {{ form.toQ.label(class="mylabel") }}
+                    {{ form.toQ()}}
+                    {% for error in form.toQ.errors %}
+                        <p class="msg-err">
+                            {{ error }}
+                        </p>    
+                    {% endfor %}
+                    </div>        
+
+                    <div class ="column">
+                        {{ form.cantidadToQ.label(class="mylabel") }}
+                        {{ form.cantidadToQ ( readonly=True) }}
+                    </div>          
+                </div>     
+             
+                {{ form.hidden_tag() }}
+                
+                <div class="row">
+                <div class ="column"> 
+                {{ form.calcular(class="button_secundario")}}
+                </div>
+                <div class ="column">    
+                    {{ form.pu.label(class="mylabel") }}
+                    {{ form.pu(readonly=True) }}
+                </div>
+                
+                </div>
+                
+           
+            {{ form.submit()}}
+            <a href="/compra">Cancel</a> 
+ 
+        </fieldset>
+        
+        </form>
+        {% endblock %}
+
+        
