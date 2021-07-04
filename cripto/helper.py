@@ -1,5 +1,6 @@
 import sqlite3
 from cripto.dataaccess import *
+from config import API_KEY
 
 def transacMon(): #Función de transacciones de Moneda: cálculo de cantidades
     dbManager = DBManager()
@@ -27,7 +28,7 @@ def transacMon(): #Función de transacciones de Moneda: cálculo de cantidades
     for m in monedas:        
         SalMON[m]+= (GasMON[m]-InvMON[m]) #Saldo = Inversión - Gasto
 
-    resultados["SalMON"]=SalMON #array asociativo
+    resultados["SalMON"]=SalMON #array asociativo para devolver varios resultados
     resultados["monedas"]=monedas
     resultados["movimientos"]=movimientos
     resultados["ValActMON"]=ValActMON
@@ -38,8 +39,9 @@ def transacMon(): #Función de transacciones de Moneda: cálculo de cantidades
 
 def llamaApi(cantidadFromQ, fromQ, toQ): #Función de conversiones de moneda a través de API
     import requests
-    url="http://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount={}&symbol={}&convert={}&CMC_PRO_API_KEY=b26f1ce2-0fdf-48f3-8b32-be478053e32a"
-    resultado = requests.get(url.format(cantidadFromQ,fromQ,toQ)) 
+    api_key=API_KEY
+    url="http://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount={}&symbol={}&convert={}&CMC_PRO_API_KEY={}"
+    resultado = requests.get(url.format(cantidadFromQ, fromQ, toQ, API_KEY)) 
     if resultado.status_code==200:
         resultadoJSON= resultado.json()   
         cantidadToQ=resultadoJSON["data"]["quote"][toQ]["price"]  

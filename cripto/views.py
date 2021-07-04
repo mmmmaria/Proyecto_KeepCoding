@@ -3,7 +3,6 @@ from flask import jsonify, render_template, request, redirect, url_for, flash, R
 from cripto.forms import MovimientosForm
 import sqlite3
 from cripto.dataaccess import *
-import requests
 from cripto.helper import *
 
 dbManager = DBManager()
@@ -15,9 +14,9 @@ def index():
     movimientos = dbManager.consultaSQL(query,parametros)
 
     for f in movimientos:
-        #f["pa"]=("{0:.8f}".format(float(llamaApi(f["cantidadToQ"],f["toQ"],"EUR")))) #Utilidad para comprobación del Status
-        f["cantidadToQ"]=("{0:.8f}".format(float(f["cantidadToQ"])))
-        f["pu"]=("{0:.8f}".format(float(f["pu"])))
+        #f["pa"]=("{0:.4f}".format(float(llamaApi(f["cantidadToQ"],f["toQ"],"EUR")))) #Utilidad para comprobación del Status
+        f["cantidadToQ"]=("{0:.4f}".format(float(f["cantidadToQ"])))
+        f["pu"]=("{0:.4f}".format(float(f["pu"])))
         
     if not movimientos:
         flash("NO HAY MOVIMIENTOS")
@@ -61,8 +60,9 @@ def compra():
                             formulario.pu.data= pu
                             
                         else:
-                            return jsonify({"status": "Error", "msg":"No se ha podido conectar con éxito con el conversor de moneda"})
-                        
+                            flash("No se ha podido conectar con éxito con el conversor de moneda.", "error")
+                            return render_template("compra.html", form=formulario)
+                                                    
                         return render_template ("compra.html", form=formulario)
 
                     else:
@@ -78,13 +78,14 @@ def compra():
                         formulario.pu.data= pu
                         
                     else:
-                        return jsonify({"status": "Error", "msg":"No se ha podido conectar con éxito con el conversor de moneda"})
+                        flash("No se ha podido conectar con éxito con el conversor de moneda.", "error")
+                        return render_template("compra.html", form=formulario)
                     
                 return render_template ("compra.html", form=formulario)
                    
 
             elif formulario.submit.data is True:
-                StringcantidadFromQ=str(formulario.cantidadFromQ.data)
+                StringcantidadFromQ = str(formulario.cantidadFromQ.data)
                 
                 if formulario.fromQHidden.data == formulario.fromQ.data and formulario.toQHidden.data == formulario.toQ.data and formulario.cantidadFromQHidden.data == StringcantidadFromQ:
                     query = "INSERT INTO movimientos (fecha, hora, fromQ, cantidadFromQ, toQ, cantidadToQ, pu) VALUES (?, ?, ?, ?, ?, ?, ?)"
@@ -128,7 +129,8 @@ def status():
             if resultado:
                 ValActMON[m]= resultado
             else:
-                return jsonify({"status": "Error", "msg":"No se ha podido conectar con éxito con el conversor de moneda"})             
+                flash("No se ha podido conectar con éxito con el conversor de moneda.", "error")
+                return render_template("status.html", formulario=formulario)            
                               
         else:
             SalMON[m]=0

@@ -3,7 +3,45 @@ FLASK CLASSIC
 María Megía Cardeñoso
 
 APLICACIÓN WEB-REGISTRO DE CRIPTOMONEDAS
-Esta aplicación consta de 3 vistas, accesibles por los links superiores de "Inicio", "Compra" y "Status":
+
+INSTALACIÓN:
+
+-Creamos un entorno virtual en la carpeta donde vayamos a instalar la aplicación:
+python -m venv venv
+Lo activamos:
+venv\Scripts\activate (Windows)
+. venv/bin/activate (Linux/MAC)
+
+-Comenzamos instalando las dependencias:
+pip install -r requiremets.txt
+
+-Creamos las variables de entorno:
+Duplicamos el fichero .env_template
+Renombramos la copia a .env
+Informamos a FLASK_ENV si se trata de una versión para "development" o para "production".
+
+-Creamos el fichero de configuración:
+Duplicamos el fichero config_template.py 
+Renombramos la copia a config.py
+Informar la SECRET_KEY para Flask WTF
+Informar la API_KEY
+Informar la ruta al fichero de base de datos; la ruta debe estar dentro de la carpeta de la aplicación.
+
+-Crear la base de datos ejecutando el fichero migrations/initial.sql
+Puede hacerse con un cliente gráfico (DBBrowser..) o con sqlite3.
+Ejecutar: 
+sqlite3 <ruta al fichero según figura en config.py>
+.read <ruta relativa a migrations/initial.sql>
+.tables
+.q
+
+EJECUCIÓN EN LOCAL:
+
+Escribir en la terminal:
+flask run
+
+VISTAS:
+La aplicación consta de 3 vistas, accesibles por los links superiores de "Inicio", "Compra" y "Status".
 
 VISTA INICIO - ROUTE:/
 Muestra el listado de movimientos grabados en la base de datos.
@@ -18,8 +56,8 @@ Existen una serie de validaciones que impiden la compra en el caso de no cumplir
 -No se puede comprar con una moneda si no se dispone de un saldo suficiente de dicha moneda, a excepción de los Euros (EUR).
 -La fecha y hora no pueden modificarse.
 -Una vez hecha la conversión de la moneda inicial y su cantidad inicial en la moneda final y su cantidad final a través del botón "Calcular", no podrán modificarse ninguno de estos campos.
-Si todo lo anterior se cumple, la compra quedará ejecutada y granada en la base de datos una vez se pulse el botón "Aceptar".
-Si existiera un fallo temporal en la base de datos o en la comunicación con la API de conversión, se avisará del error en cada caso mediante un mensaje .
+Si todo lo anterior se cumple, la compra quedará ejecutada y grabada en la base de datos una vez se pulse el botón "Aceptar".
+Si existiera un fallo temporal en la base de datos o en la comunicación con la API de conversión, se avisará del error en cada caso mediante un mensaje.
 
 VISTA STATUS - ROUTE:/status:
 En esta vista se ofrecen 4 campos calculados en función de la inversión en Euros, las compras realizadas y la cotización de cada moneda en el momento actual:

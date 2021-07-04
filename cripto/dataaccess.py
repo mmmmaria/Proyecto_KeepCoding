@@ -1,7 +1,8 @@
 import sqlite3
+from config import PATH_TO_DATABASE
 
 class DBManager():
-    
+        
     def __toDict__(self, cur):
         # Obtenemos los datos de la consulta
         claves = cur.description
@@ -19,7 +20,7 @@ class DBManager():
 
     def consultaSQL(self, query, parametros=[]):
         # Abrimos la conexion
-        conexion = sqlite3.connect("data/movimientos.db")
+        conexion = sqlite3.connect(PATH_TO_DATABASE)
         cur = conexion.cursor()
 
         # Ejecutamos la consulta
@@ -29,7 +30,7 @@ class DBManager():
         return resultado
 
     def modificaTablaSQL(self,query,parametros=[]):
-        conexion=sqlite3.connect("data/movimientos.db")
+        conexion=sqlite3.connect(PATH_TO_DATABASE)
         cur=conexion.cursor()
         cur.execute(query,parametros)
 
