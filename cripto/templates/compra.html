@@ -3,11 +3,13 @@
     {% block titulo %}Compra{% endblock %}
 
         {% block contenido %}
-            <a href="/">Inicio /</a>
-            Compra /
-            <a href="/status">Status</a> 
-            <h1>COMPRA DE CRYPTOS</h1>
+        <nav class="menu">
+            <a href="/">Inicio</a>
+            <a class="activo" href="/compra">Compra</a>
+            <a href="/status">Status</a>
+        </nav>
             
+        <h1>COMPRA DE CRYPTOS</h1>
         <form action="/compra" autocomplete="off" method="POST">
             <fieldset class="container">
                 {{ form.hidden_tag() }}
@@ -69,7 +71,7 @@
              
                 {{ form.hidden_tag() }}
                 
-                <div class="row">
+            <div class="row">
                 <div class ="column"> 
                 {{ form.calcular(class="button_secundario")}}
                 </div>
@@ -77,16 +79,15 @@
                     {{ form.pu.label(class="mylabel") }}
                     {{ form.pu(readonly=True) }}
                 </div>
-                
-                </div>
-                
-           
+            </div>
+               
             {{ form.submit()}}
             <a href="/compra">Cancel</a> 
  
         </fieldset>
         
         </form>
-        {% endblock %}
+        
+    {% endblock %}
 
         

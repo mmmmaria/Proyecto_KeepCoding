@@ -2,10 +2,12 @@
 
     {% block titulo %}Inicio{% endblock %}
 
-        {% block contenido %}
-            Inicio /
-                <a href="/compra">Compra /</a>
-                <a href="/status">Status</a>
+    {% block contenido %}
+    <nav class="menu">
+        <a class="activo" href="/">Inicio</a>
+        <a href="/compra">Compra</a>
+        <a href="/status">Status</a>
+    </nav>
                 
         <h1>MOVIMIENTOS</h1>
         <table>
@@ -37,6 +39,6 @@
         <a href="status">Status</a> 
         <a href="compra">Compra</a> 
                        
-{% endblock %}
+    {% endblock %}
         
    

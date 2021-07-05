@@ -16,6 +16,7 @@ venv\Scripts\activate (Windows)
   
 -Comenzamos instalando las dependencias:  
 pip install -r requirements.txt  
+Esta aplicación fue desarrollada con la versión 3.9.5 de Python  
   
 -Creamos las variables de entorno:  
 Duplicamos el fichero .env_template  
@@ -41,7 +42,7 @@ sqlite3 <ruta al fichero según figura en config.py>
   
 Escribir en la terminal:  
 flask run  
-Levantar   
+Levantar el puerto host:5000 ó http://127.0.0.1:5000/        
   
 ### VISTAS:  
   
